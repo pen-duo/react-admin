@@ -1,7 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
 
-import App from "./App"
+import App from "./App";
+import memoryUtils from "./utils/memoryUtils";
+import storageUtils from "./utils/storageUtils";
 
-ReactDOM.render(<App></App>,document.getElementById("root"))
+const user = storageUtils.getUser();
+memoryUtils.user = user;
+ReactDOM.render(<App></App>, document.getElementById("root"));

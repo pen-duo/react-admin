@@ -1,19 +1,30 @@
 import React, { Component } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.scss";
 import logo from "./images/logo.png";
 import { reqLogin } from "../../api/index";
+import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  async onFinish(user) {
+    const res = await reqLogin(user.username, user.password);
+    if (res.status === 0) {
+      message.success("登陆成功");
+      const user = res.data;
+      memoryUtils.user = user;
+      storageUtils.saveUser(user);
+      this.props.history.replace("/");
+    } else {
+      message.error(res.msg);
+    }
+  }
   render() {
-    const onFinish = async (user) => {
-      const res = await reqLogin(user.username, user.password);
-      console.log(res);
-    };
     return (
       <div className="login">
         <header className="login-header">
@@ -22,7 +33,11 @@ class Login extends Component {
         </header>
         <section className="login-content">
           <h2>用户登录</h2>
-          <Form name="normal_login" className="login-form" onFinish={onFinish}>
+          <Form
+            name="normal_login"
+            className="login-form"
+            onFinish={this.onFinish.bind(this)}
+          >
             <Form.Item
               name="username"
               rules={[
