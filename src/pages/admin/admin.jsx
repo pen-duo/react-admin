@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import memoryUtils from "../../utils/memoryUtils";
 import { Layout } from "antd";
 import LeftNav from "../../components/left-nav/left-nav";
@@ -9,6 +9,7 @@ import Home from "../home/home";
 import Category from "../category/category";
 import Product from "../product/product";
 import User from "../user/user";
+import Role from "../role/role";
 import Bar from "../charts/bar";
 import Line from "../charts/line";
 import Pie from "../charts/pie";
