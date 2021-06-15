@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.scss";
-import logo from "./images/logo.png";
+import logo from "../../assets/images/logo.png";
 import { reqLogin } from "../../api/index";
 import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -25,6 +26,10 @@ class Login extends Component {
     }
   }
   render() {
+    const user = memoryUtils.user;
+    if (user && user._id) {
+      return <Redirect to="/"></Redirect>;
+    }
     return (
       <div className="login">
         <header className="login-header">
