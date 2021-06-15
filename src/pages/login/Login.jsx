@@ -1,0 +1,92 @@
+import React, { Component } from "react";
+import { Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import "./login.scss";
+import logo from "./images/logo.png";
+import { reqLogin } from "../../api/index";
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    const onFinish = async (user) => {
+      const res = await reqLogin(user.username, user.password);
+      console.log(res);
+    };
+    return (
+      <div className="login">
+        <header className="login-header">
+          <img src={logo} alt="logo" />
+          <h1>React项目: 后台管理项目</h1>
+        </header>
+        <section className="login-content">
+          <h2>用户登录</h2>
+          <Form name="normal_login" className="login-form" onFinish={onFinish}>
+            <Form.Item
+              name="username"
+              rules={[
+                { required: true, message: "用户名不能为空" },
+                {
+                  min: 4,
+                  message: "用户名长度不能小于4位",
+                  whitespace: true,
+                },
+                {
+                  max: 12,
+                  message: "用户名长度不能大于12位",
+                },
+                {
+                  pattern: /^[a-zA-Z0-9_]+$/,
+                  message: "用户名必须由英文,数字,下划线组成",
+                },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Username"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "用户名不能为空 " },
+                {
+                  min: 4,
+                  message: "密码长度不能小于4位",
+                  whitespace: true,
+                },
+                {
+                  max: 12,
+                  message: "密码长度不能大于12位",
+                },
+                {
+                  pattern: /^[a-zA-Z0-9_]+$/,
+                  message: "密码必须由英文,数字,下划线组成",
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </section>
+      </div>
+    );
+  }
+}
+
+export default Login;

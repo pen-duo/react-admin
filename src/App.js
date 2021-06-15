@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
-import {BrowserRouter,Router} from "react-router-dom"
-
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./pages/login/login";
+import Admin from "./pages/admin/admin";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {};
   }
-  render() { 
+  render() {
     return (
-      <Button type="primary">你好</Button>
-      );
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/" component={Admin}></Route>
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
- 
+
 export default Home;

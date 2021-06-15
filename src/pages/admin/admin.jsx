@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-class Adming extends Component {
+import React, { Component } from "react";
+class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {};
   }
-  render() { 
-    return (  );
+  render() {
+    return <div>后台管理</div>;
   }
 }
- 
-export default Adming;
+
+export default Admin;
